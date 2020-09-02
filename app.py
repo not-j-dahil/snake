@@ -25,12 +25,13 @@ class Snake(tk.Canvas):
     
     def create_objects(self):
         self.create_text(
-            45,12, text=f"Score {self.score}", tag="score", fill="#fff", font=("TkDefaultFont", 14))
+            45,12, text=f"Score {self.score}", tag="score", fill="#fff", font=("TkDefaultFont", 14)
+        )
         for x_pos, y_pos in self.snake_positions:
             self.create_image(x_pos, y_pos, image=self.snake_body, tag="snake")
 
         self.create_image(*self.food_position, image=self.food, tag= "food")
-
+        self.create_rectangle(7,27,593,613, outline="#999999")
 
 
 root = tk.Tk()

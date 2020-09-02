@@ -2,6 +2,8 @@ import tkinter as tk
 from PIL import Image, ImageTk
 
 MOVE_INCREMENT = 20
+MOVES_PER_SECOND = 15
+GAME_SPEED = 1000 // MOVES_PER_SECOND # // floor division
 
 class Snake(tk.Canvas):
     def __init__(self):
@@ -14,7 +16,7 @@ class Snake(tk.Canvas):
         self.load_assets()
         self.create_objects()
 
-        self.after(75, self.perform_actions) #75 = 75 milliseconds | call function name NOT function call ('perform_actions()')
+        self.after(GAME_SPEED, self.perform_actions) #75 = 75 milliseconds | call function name NOT function call ('perform_actions()')
 
     def load_assets(self):
         try:
@@ -48,7 +50,7 @@ class Snake(tk.Canvas):
 
     def perform_actions(self):
         self.move_snake()
-        self.after(75, self.perform_actions)
+        self.after(GAME_SPEED, self.perform_actions)
 
 
 root = tk.Tk()

@@ -49,8 +49,19 @@ class Snake(tk.Canvas):
             self.coords(segment, position)
 
     def perform_actions(self):
+        if self.check_collisions():
+            return
         self.move_snake()
         self.after(GAME_SPEED, self.perform_actions)
+
+    def check_collisions(self):
+        head_x_pos, head_y_pos = self.snake_positions[0]
+
+        return (
+            head_x_pos in (0,600)
+            or head_y_pos in (20, 620)
+            or (head_x_pos, head_y_pos) in self.snake_positions
+        )
 
 
 root = tk.Tk()

@@ -14,6 +14,8 @@ class Snake(tk.Canvas):
         self.load_assets()
         self.create_objects()
 
+        self.after(75, self.perform_actions) #75 = 75 milliseconds | call function name NOT function call ('perform_actions()')
+
     def load_assets(self):
         try:
             self.snake_body_image = Image.open("./assets/snake.png")
@@ -44,7 +46,9 @@ class Snake(tk.Canvas):
         for segment, position in zip(self.find_withtag("snake"), self.snake_positions):
             self.coords(segment, position)
 
-
+    def perform_actions(self):
+        self.move_snake()
+        self.after(75, self.perform_actions)
 
 
 root = tk.Tk()

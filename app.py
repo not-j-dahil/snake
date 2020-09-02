@@ -44,6 +44,9 @@ class Snake(tk.Canvas):
     def move_snake(self):
         head_x_pos, head_y_pos = self.snake_positions[0]
 
+        new_head_pos = (head_x_pos + MOVE_INCREMENT, head_y_pos)
+
+        '''
         if self.direction == "Left":
             new_head_pos = (head_x_pos - MOVE_INCREMENT, head_y_pos)
         elif self.direction == "Right":
@@ -52,6 +55,7 @@ class Snake(tk.Canvas):
             new_head_pos = (head_x_pos, head_y_pos - MOVE_INCREMENT)
         elif self.direction == "Down":
             new_head_pos = (head_x_pos, head_y_pos + MOVE_INCREMENT)
+        '''
 
         self.snake_positions = [new_head_pos] + self.snake_positions[:-1]
 
@@ -70,7 +74,7 @@ class Snake(tk.Canvas):
         return (
             head_x_pos in (0,600)
             or head_y_pos in (20, 620)
-            or (head_x_pos, head_y_pos) in self.snake_positions
+            or (head_x_pos, head_y_pos) in self.snake_positions[1:]
         )
 
     def on_key_press(self, e):

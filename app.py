@@ -6,6 +6,7 @@ class Snake(tk.Canvas):
         super().__init__(width=600, height=620, background="black", highlightthickness=0)
 
         self.snake_positions = [(100, 100), (80, 100), (60, 100)]
+        self.food_position = (200, 100)
         
         self.load_assets()
         self.create_objects()
@@ -25,6 +26,8 @@ class Snake(tk.Canvas):
         for x_pos, y_pos in self.snake_positions:
             self.create_image(x_pos, y_pos, image=self.snake_body, tag="snake")
 
+        self.create_image(self.food_position[0], self.food_position[1], image=self.food, tag= "food")
+        
 
 
 root = tk.Tk()

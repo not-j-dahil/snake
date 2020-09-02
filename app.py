@@ -75,7 +75,14 @@ class Snake(tk.Canvas):
 
     def on_key_press(self, e):
         new_direction = e.keysym
-        self.direction = new_direction
+        all_directions = ("Up", "Down", "Left", "Right")
+        opposites = ({"Up", "Down"}, {"Left", "Right"})
+
+        if (
+            new_direction in all_directions
+            and {new_direction, self.direction} not in opposites #prevent eating itself 
+        ):
+            self.direction = new_direction
 
 root = tk.Tk()
 root.title("Snake")

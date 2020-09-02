@@ -5,7 +5,10 @@ class Snake(tk.Canvas):
     def __init__(self):
         super().__init__(width=600, height=620, background="black", highlightthickness=0)
 
+        self.snake_positions = [(100, 100), (80, 100), (60, 100)]
+        
         self.load_assets()
+        self.create_objects()
 
     def load_assets(self):
         try:
@@ -17,6 +20,12 @@ class Snake(tk.Canvas):
         except IOError as error:
             print(error)
             root.destroy()
+    
+    def create_objects(self):
+        for x_pos, y_pos in self.snake_positions:
+            self.create_image(x_pos, y_pos, image=self.snake_body, tag="snake")
+
+
 
 root = tk.Tk()
 root.title("Snake")

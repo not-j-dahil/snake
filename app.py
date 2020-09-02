@@ -7,6 +7,7 @@ class Snake(tk.Canvas):
 
         self.snake_positions = [(100, 100), (80, 100), (60, 100)]
         self.food_position = (200, 100)
+        self.score = 0
         
         self.load_assets()
         self.create_objects()
@@ -23,11 +24,13 @@ class Snake(tk.Canvas):
             root.destroy()
     
     def create_objects(self):
+        self.create_text(
+            45,12, text=f"Score {self.score}", tag="score", fill="#fff", font=("TkDefaultFont", 14))
         for x_pos, y_pos in self.snake_positions:
             self.create_image(x_pos, y_pos, image=self.snake_body, tag="snake")
 
-        self.create_image(self.food_position[0], self.food_position[1], image=self.food, tag= "food")
-        
+        self.create_image(*self.food_position, image=self.food, tag= "food")
+
 
 
 root = tk.Tk()

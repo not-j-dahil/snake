@@ -3,8 +3,8 @@ import tkinter as tk
 from PIL import Image, ImageTk
 
 MOVE_INCREMENT = 20
-MOVES_PER_SECOND = 15
-GAME_SPEED = 1000 // MOVES_PER_SECOND # // floor division
+moves_per_second = 10
+GAME_SPEED = 1000 // moves_per_second # // floor division
 
 class Snake(tk.Canvas):
     def __init__(self):
@@ -34,7 +34,11 @@ class Snake(tk.Canvas):
     
     def create_objects(self):
         self.create_text(
-            45,12, text=f"Score {self.score}", tag="score", fill="#fff", font=("TkDefaultFont", 14)
+            100,12, 
+            text=f"Score {self.score} (speed: {moves_per_second})", 
+            tag="score", 
+            fill="#fff", 
+            font=("TkDefaultFont", 14)
         )
         for x_pos, y_pos in self.snake_positions:
             self.create_image(x_pos, y_pos, image=self.snake_body, tag="snake")
@@ -93,6 +97,10 @@ class Snake(tk.Canvas):
             self.score += 1
             self.snake_positions.append(self.snake_positions[-1])
 
+            if self.score % 5 == 0:
+                global moves_per_second
+                moves_per_second += 1
+
             self.create_image(
                 *self.snake_positions[-1], image=self.snake_body, tag="snake"
             )
@@ -101,7 +109,11 @@ class Snake(tk.Canvas):
             self.coords(self.find_withtag("food"), self.food_position)
 
             score = self.find_withtag("score")
-            self.itemconfigure(score, text=f"Score: {self.score}", tag="score")
+            self.itemconfigure(
+                score, 
+                text=f"Score: {self.score} (speed: {moves_per_second})", 
+                tag="score"
+            )
 
     def set_new_food_position(self):
         while True:
@@ -115,10 +127,10 @@ class Snake(tk.Canvas):
     def end_game(self):
         self.delete(tk.ALL)
         self.create_text(
-            self.winfo_width() / 2
-            self.winfo_height() / 2
-            text=f"Game over! You scored {self.score}!"
-            fill="#fff"
+            self.winfo_width() / 2,
+            self.winfo_height() / 2,
+            text=f"Game over! You scored {self.score}!",
+            fill="#fff",
             font=("TkDefaultFont", 24)
         )
 

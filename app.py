@@ -22,6 +22,7 @@ class Snake(tk.Canvas):
         self.after(GAME_SPEED, self.perform_actions) #75 = 75 milliseconds | call function name NOT function call ('perform_actions()')
 
     def load_assets(self):
+        '''Load images for snake and food from assets'''
         try:
             self.snake_body_image = Image.open("./assets/snake.png")
             self.snake_body = ImageTk.PhotoImage(self.snake_body_image)
@@ -33,6 +34,7 @@ class Snake(tk.Canvas):
             root.destroy()
     
     def create_objects(self):
+        '''Create objects with the loaded assets'''
         self.create_text(
             100,12, 
             text=f"Score {self.score} (speed: {moves_per_second})", 

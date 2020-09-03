@@ -64,6 +64,9 @@ class Snake(tk.Canvas):
             self.coords(segment, position)
 
     def perform_actions(self):
+        '''Recursive function - Refresh window 
+        | Checks collisions
+        | Moves snake'''
         if self.check_collisions():
             self.end_game()
             return
@@ -73,6 +76,7 @@ class Snake(tk.Canvas):
         self.after(GAME_SPEED, self.perform_actions)
 
     def check_collisions(self):
+        '''Check snake collision to border or itself'''
         head_x_pos, head_y_pos = self.snake_positions[0]
 
         return (
@@ -82,6 +86,7 @@ class Snake(tk.Canvas):
         )
 
     def on_key_press(self, e):
+        '''keybindings and direction change'''
         new_direction = e.keysym
         all_directions = ("Up", "Down", "Left", "Right")
         opposites = ({"Up", "Down"}, {"Left", "Right"})
@@ -93,6 +98,7 @@ class Snake(tk.Canvas):
             self.direction = new_direction
     
     def check_food_collision(self):
+        '''Checks if food eaten -> Move food randomly'''
         if self.snake_positions[0] == self.food_position:
             self.score += 1
             self.snake_positions.append(self.snake_positions[-1])
